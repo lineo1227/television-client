@@ -18,7 +18,7 @@
                     <PieChart />
                 </el-icon>历史
             </div>
-            <div class="television__user-control"><el-icon>
+            <div class="television__user-control" @click="changePopupFlag(true)"><el-icon>
                     <ChatDotSquare />
                 </el-icon>求片</div>
             <div class="television__user-avatar">
@@ -26,12 +26,50 @@
             </div>
         </div>
     </div>
+    <el-dialog v-model="popupFlag" width="400" center class="television-header-popup" :before-close="handleClose">
+        <h3>把想看的影视留言</h3>
+        <div class="message">即时影视，给你最好的体验！</div>
+        <el-input v-model="textarea" style="padding:0 20px;box-sizing: border-box;" :rows="4" type="textarea" />
+        <template #footer>
+            <el-button type="primary" @click="onSubmit">点击提交</el-button>
+        </template>
+    </el-dialog>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Search, ChatDotSquare, PieChart } from '@element-plus/icons-vue'
+const textarea = ref("")
 const input2 = ref('')
+const popupFlag = ref(false)
+const changePopupFlag = (bool: boolean) => {
+    popupFlag.value = bool
+}
+const handleClose = (done: () => void) => {
+    ElMessageBox.confirm('确定取消提交?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+    }).then(() => {
+        ElMessage({
+            type: 'info',
+            message: '取消提交',
+        })
+        done()
+    })
+}
+const onSubmit = () => {
+    ElMessageBox.confirm('确定提交?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+    }).then(() => {
+        popupFlag.value = false
+        ElMessage({
+            type: 'success',
+            message: '提交成功',
+        })
+    })
+
+}
 </script>
 
 <style lang="scss">
@@ -42,6 +80,34 @@ const input2 = ref('')
     position: relative;
     z-index: 2;
     height: 40px;
+
+    &-popup {
+        background-color: #191825;
+
+        h3 {
+            text-align: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .message {
+            font-size: 16px;
+            text-align: center;
+            color: rgba(255, 255, 255, .7);
+            margin: 40px 0;
+        }
+
+        .el-button {
+            background-color: $color-purple;
+            border-color: $color-purple;
+            margin-top: 10px;
+
+            &:hover {
+                background-color: lighten($color: $color-purple, $amount: 10%);
+                border-color: lighten($color: $color-purple, $amount: 10%);
+            }
+        }
+    }
 
     .television {
         &__logo {
@@ -70,6 +136,7 @@ const input2 = ref('')
             &-control {
                 @include flex($ai: center);
                 margin-right: 20px;
+                cursor: pointer;
 
                 .el-icon {
                     margin-right: 5px;

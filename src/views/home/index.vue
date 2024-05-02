@@ -20,11 +20,11 @@ import SortCom from "@/components/SortCom.vue"
     min-height: 100vh;
 
     &__bg {
-        height: 420px;
+        height: 448px;
         background: linear-gradient(transparent, black, black, transparent);
         width: 100vw;
         margin-top: -70px;
-        padding-top: 250px;
+        padding-top: 266px;
     }
 
     &__container {

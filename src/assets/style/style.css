@@ -136,8 +136,22 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+:root {
+  --el-color-primary: #b67aff;
+}
 .el-input {
   --el-border-color: gray;
   --el-input-focus-border: purple;
   --el-input-focus-border-color: purple;
+}
+.el-button {
+  --el-button-bg-color: #9945ff;
+  --el-button-border-color: #9945ff;
+  --el-button-hover-bg-color: rgb(126, 20, 255);
+  --el-button-hover-border-color: rgb(126, 20, 255);
+  --el-button-active-bg-color: rgb(126, 20, 255);
+  --el-button-active-border-color: rgb(126, 20, 255);
+  --el-button-text-color: white;
+  --el-button-disabled-bg-color: rgb(80, 0, 80);
+  --el-button-hover-text-color: white;
 }

@@ -1,0 +1,20 @@
+$color-purple: #7d12ff;
+$color-purple-light: #13131e;
+$border-color: linear-gradient(rgba(128, 0, 128, 0.305), rgba(255, 255, 255, 0.305));
+@mixin flex($fd: row, $ai: auto, $jc: auto) {
+  display: flex;
+  flex-direction: $fd;
+  align-items: $ai;
+  justify-content: $jc;
+}
+@mixin position($pos: relative, $l: auto, $t: auto, $r: auto, $b: auto) {
+  position: $pos;
+  left: $l;
+  top: $t;
+  right: $r;
+  bottom: $b;
+}
+@mixin boxPadding($pd) {
+  padding: $pd;
+  box-sizing: border-box;
+}

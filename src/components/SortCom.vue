@@ -18,8 +18,8 @@ const { title, digest, add } = withDefaults(defineProps<{
     digest: string,
     add: boolean
 }>(), {
-    title: '最近更新',
-    digest: "超级英雄 漫威宇宙",
+    title: '',
+    digest: "",
     add: false
 })
 </script>
@@ -55,7 +55,8 @@ const { title, digest, add } = withDefaults(defineProps<{
 
     &-content {
         @include flex($jc: space-between);
-        margin-top: 40px
+        margin-top: 40px;
+        flex-wrap: wrap;
     }
 
 }

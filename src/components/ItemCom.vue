@@ -21,6 +21,7 @@
     @include flex($ai: center, $fd: column);
     font-size: 16px;
     color: $color-white-light;
+    margin-bottom: 20px;
 
     img {
         height: 300px;

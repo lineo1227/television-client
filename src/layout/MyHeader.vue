@@ -4,10 +4,8 @@
             television-client
         </div>
         <ul class="television__model">
-            <li class="active">首页</li>
-            <li>电影</li>
-            <li>动漫</li>
-            <li>会员专区</li>
+            <li @click="pathTo(item)" :class="active === item.id && 'active'" v-for="item in routerList" :key="item.id">
+                {{ item.name }}</li>
         </ul>
         <div class="television__search">
             <el-input v-model="input2" placeholder="猫和老鼠" :suffix-icon="Search" />
@@ -38,7 +36,30 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter, useRoute } from "vue-router"
 import { Search, ChatDotSquare, PieChart } from '@element-plus/icons-vue'
+const active = ref(0)
+const router = useRouter()
+const route = useRoute()
+interface RouterType {
+    id: number,
+    name: string,
+    path: string
+}
+const routerList = ref<RouterType[]>([
+    { id: 0, name: '首页', path: '/' },
+    { id: 1, name: '全部', path: '/all' },
+    { id: 2, name: '电影', path: '/movie' },
+    { id: 3, name: '动漫', path: '/anime' },
+    { id: 4, name: '会员专区', path: '/vip' },
+])
+const pathTo = (item: RouterType) => {
+    active.value = item.id
+    router.push(item.path)
+}
+setTimeout(() => {
+    active.value = routerList.value.findIndex(item => item.path === route.path)
+})
 const textarea = ref("")
 const input2 = ref('')
 const popupFlag = ref(false)
@@ -129,7 +150,6 @@ const onSubmit = () => {
             li {
                 cursor: pointer;
                 margin-right: 35px;
-                transition: .3s;
 
                 &.active {
                     font-size: 18px;

@@ -4,7 +4,7 @@
             television-client
         </div>
         <ul class="television__model">
-            <li>首页</li>
+            <li class="active">首页</li>
             <li>电影</li>
             <li>动漫</li>
             <li>会员专区</li>
@@ -55,7 +55,11 @@ const handleClose = (done: () => void) => {
             message: '取消提交',
         })
         done()
+        textarea.value = ""
     })
+        .catch(() => {
+            // catch error
+        })
 }
 const onSubmit = () => {
     ElMessageBox.confirm('确定提交?', '提示', {
@@ -67,6 +71,7 @@ const onSubmit = () => {
             type: 'success',
             message: '提交成功',
         })
+        textarea.value = ""
     })
 
 }
@@ -74,7 +79,7 @@ const onSubmit = () => {
 
 <style lang="scss">
 .television-header {
-    width: 1028px;
+    width: 1188px;
     color: white;
     @include flex($ai: center);
     position: relative;
@@ -87,13 +92,13 @@ const onSubmit = () => {
         h3 {
             text-align: center;
             color: white;
-            font-size: 20px;
+            font-size: 24px;
         }
 
         .message {
-            font-size: 16px;
+            font-size: 20px;
             text-align: center;
-            color: rgba(255, 255, 255, .7);
+            color: $color-white-light;
             margin: 40px 0;
         }
 
@@ -111,7 +116,7 @@ const onSubmit = () => {
 
     .television {
         &__logo {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 700;
             cursor: pointer;
         }
@@ -124,6 +129,12 @@ const onSubmit = () => {
             li {
                 cursor: pointer;
                 margin-right: 35px;
+                transition: .3s;
+
+                &.active {
+                    font-size: 18px;
+                    font-weight: 700;
+                }
             }
         }
 
@@ -156,7 +167,7 @@ const onSubmit = () => {
         }
 
         &__search {
-            margin-left: 88px;
+            margin-left: 68px;
             width: 200px;
 
             .el-input__wrapper {

@@ -20,7 +20,7 @@
     cursor: pointer;
     @include flex($ai: center, $fd: column);
     font-size: 16px;
-    color: rgba(255, 255, 255, .7);
+    color: $color-white-light;
 
     img {
         height: 300px;

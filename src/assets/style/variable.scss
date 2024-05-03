@@ -1,6 +1,7 @@
 $color-purple: #7d12ff;
 $color-purple-light: #13131e;
 $border-color: linear-gradient(rgba(128, 0, 128, 0.305), rgba(255, 255, 255, 0.305));
+$color-white-light: rgba(255, 255, 255, 0.7);
 @mixin flex($fd: row, $ai: auto, $jc: auto) {
   display: flex;
   flex-direction: $fd;

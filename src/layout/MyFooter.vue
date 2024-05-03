@@ -30,7 +30,7 @@
 <style scoped lang="scss">
 .television-footer {
     color: white;
-    width: 1028px;
+    width: 1188px;
 
 
     .television {
@@ -42,7 +42,7 @@
             li {
                 width: 50%;
                 font-size: 16px;
-                color: rgba(253, 253, 253, .7);
+                color: $color-white-light;
 
                 h4 {
                     color: white;
@@ -52,6 +52,7 @@
 
                 span {
                     margin-right: 40px;
+                    cursor: pointer;
                 }
             }
 
@@ -62,7 +63,7 @@
             text-align: center;
             padding: 20px 0;
             font-size: 16px;
-            color: rgba(253, 253, 253, .7);
+            color: $color-white-light;
 
         }
     }

@@ -4,14 +4,32 @@
             <Advertisement />
         </div>
         <div class="home__container">
-            <SortCom />
+            <SortCom title="最近更新" digest="超级英雄 漫威宇宙 ">
+                <ItemCom v-for="item in 5"></ItemCom>
+            </SortCom>
+            <SortCom title="正在热播" digest="超级英雄 漫威宇宙 ">
+                <HotItem v-for="item in 4"></HotItem>
+            </SortCom>
+            <BingeWatch />
+            <SortCom title="电影推荐" digest="超级英雄 漫威宇宙 ">
+                <ItemCom v-for="item in 5"></ItemCom>
+            </SortCom>
+            <SortCom title="动漫推荐" digest="超级英雄 漫威宇宙 ">
+                <ItemCom v-for="item in 5"></ItemCom>
+            </SortCom>
+            <SortCom title="儿童推荐" digest="超级英雄 漫威宇宙 ">
+                <ItemCom v-for="item in 5"></ItemCom>
+            </SortCom>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import ItemCom from "@/components/ItemCom.vue";
+import HotItem from "./components/HotItem.vue"
 import Advertisement from "./components/Advertisement.vue"
 import SortCom from "@/components/SortCom.vue"
+import BingeWatch from "./components/BingeWatch.vue";
 </script>
 
 <style lang="scss">
@@ -28,7 +46,7 @@ import SortCom from "@/components/SortCom.vue"
     }
 
     &__container {
-        width: 1028px;
+        width: 1188px;
         margin: 0 auto;
     }
 }

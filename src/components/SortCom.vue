@@ -1,30 +1,42 @@
 <template>
     <div class="sort-com">
         <div class="sort-com-title">
-            <h3>最近更新</h3>
-            <span>超级英雄 漫威宇宙</span>
+            <h3>{{ title }}</h3>
+            <span>{{ digest }}</span>
+            <el-button size="small" v-if="add" type="primary" class="sort-com-btn"> 查看更多</el-button>
         </div>
         <ul class="sort-com-content">
-            <ItemCom />
-            <ItemCom />
-            <ItemCom />
-            <ItemCom />
+            <slot></slot>
         </ul>
     </div>
 </template>
 
 <script setup lang="ts">
-import ItemCom from "@/components/ItemCom.vue"
+import { withDefaults } from 'vue';
+const { title, digest, add } = withDefaults(defineProps<{
+    title: string,
+    digest: string,
+    add: boolean
+}>(), {
+    title: '最近更新',
+    digest: "超级英雄 漫威宇宙",
+    add: false
+})
 </script>
 
 <style scoped lang="scss">
 .sort-com {
-    height: 500px;
     @include flex($fd: column, $jc: space-between);
     margin-bottom: 50px;
 
+    &-btn {
+        @include position(absolute, $b: 0px, $r: 10px);
+        font-size: 14px;
+    }
+
     &-title {
         @include flex($ai: flex-end);
+        position: relative;
 
         h3 {
             font-size: 36px;
@@ -36,13 +48,14 @@ import ItemCom from "@/components/ItemCom.vue"
             letter-spacing: 1px;
             font-size: 20px;
             margin-left: 6px;
-            color: rgba(255, 255, 255, .7);
+            color: $color-white-light;
         }
 
     }
 
     &-content {
-        @include flex($jc: space-between)
+        @include flex($jc: space-between);
+        margin-top: 40px
     }
 
 }

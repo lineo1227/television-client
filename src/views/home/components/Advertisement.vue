@@ -1,7 +1,12 @@
 <template>
     <div class="advertisement">
         <div class="advertisement-title">神奇蜘蛛侠</div>
-        <div class="advertisement-digest">类型: 动作 / 科幻 / 恐怖 / 奇幻 / 冒险</div>
+        <div class="advertisement-digest">
+            <span><el-icon>
+                    <StarFilled />
+                </el-icon>(4.8/5.0)</span>
+            类型: 动作 / 科幻 / 恐怖 / 奇幻 / 冒险
+        </div>
         <div class="advertisement-desc">
             奇异博士斯蒂芬·斯特兰奇正在参加他的单恋对象克里斯汀·帕尔默的婚礼，这时外面的街道上出了乱子。一只巨大的章鱼怪正在跨越维度追逐名叫阿美莉卡·查维兹少的远古魔法师穿越到现在入侵地球的时代...
         </div>
@@ -12,7 +17,9 @@
     </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { StarFilled } from "@element-plus/icons-vue"
+</script>
 
 <style lang="scss">
 .advertisement {
@@ -32,10 +39,21 @@
 
     &-digest {
         font-size: 16px;
+        color: $color-white-light;
+
+        span {
+            .el-icon {
+                margin-right: 2px;
+                color: #FFC107;
+            }
+
+            color: white;
+            margin-right: 2px;
+        }
     }
 
     &-desc {
-        color: rgba(255, 255, 255, .7);
+        color: $color-white-light;
         font-size: 16px;
         line-height: 20px;
     }

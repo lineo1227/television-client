@@ -7,7 +7,7 @@
             <SortCom title="最近更新" digest="超级英雄 漫威宇宙 ">
                 <ItemCom v-for="item in 5"></ItemCom>
             </SortCom>
-            <SortCom title="正在热播" digest="超级英雄 漫威宇宙 ">
+            <SortCom title="正在热播" digest="超级英雄 漫威宇宙 " :add="true">
                 <HotItem v-for="item in 4"></HotItem>
             </SortCom>
             <BingeWatch />

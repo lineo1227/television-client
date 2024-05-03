@@ -4,14 +4,16 @@
             television-client
         </div>
         <ul class="television__model">
-            <li @click="pathTo(item)" :class="active === item.id && 'active'" v-for="item in routerList" :key="item.id">
+            <li @click="handleClick(item)" :class="active === item.id && 'active'" v-for="item in routerList"
+                :key="item.id">
                 {{ item.name }}</li>
         </ul>
         <div class="television__search">
-            <el-input v-model="input2" placeholder="猫和老鼠" :suffix-icon="Search" />
+            <el-input v-model="input2" @keyup.enter="pathTo('/search?key=' + input2)" placeholder="猫和老鼠"
+                :suffix-icon="Search" />
         </div>
         <div class="television__user">
-            <div class="television__user-record">
+            <div class="television__user-record" @click="pathTo('/brower')">
                 <el-icon>
                     <PieChart />
                 </el-icon>历史
@@ -53,9 +55,12 @@ const routerList = ref<RouterType[]>([
     { id: 3, name: '动漫', path: '/anime' },
     { id: 4, name: '会员专区', path: '/vip' },
 ])
-const pathTo = (item: RouterType) => {
-    active.value = item.id
-    router.push(item.path)
+const handleClick = (item: RouterType) => {
+    pathTo(item.path, item.id)
+}
+const pathTo = (path: string, id = -1) => {
+    router.push(path)
+    active.value = id
 }
 setTimeout(() => {
     active.value = routerList.value.findIndex(item => item.path === route.path)

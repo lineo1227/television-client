@@ -4,6 +4,8 @@ import All from "@/views/all/index.vue"
 import Movie from "@/views/movie/index.vue"
 import Anime from "@/views/anime/index.vue"
 import Vip from "@/views/vip/index.vue"
+import Brower from "@/views/brower/index.vue"
+import Search from "@/views/search/index.vue"
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -31,7 +33,18 @@ const router = createRouter({
       path: '/vip',
       name: 'vip',
       component: Vip
+    },
+    {
+      path: '/brower',
+      name: 'brower',
+      component: Brower
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: Search
     }
+
   ]
 })
 

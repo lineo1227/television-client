@@ -5,7 +5,7 @@
             <span>{{ digest }}</span>
             <el-button size="small" v-if="add" type="primary" class="sort-com-btn"> 查看更多</el-button>
         </div>
-        <ul class="sort-com-content">
+        <ul :class="add ? 'active' : ''" class="sort-com-content">
             <slot></slot>
         </ul>
     </div>
@@ -20,7 +20,7 @@ const { title, digest, add } = withDefaults(defineProps<{
 }>(), {
     title: '',
     digest: "",
-    add: false
+    add: false,
 })
 </script>
 
@@ -54,9 +54,16 @@ const { title, digest, add } = withDefaults(defineProps<{
     }
 
     &-content {
-        @include flex($jc: space-between);
+        // @include flex;
+        display: grid;
         margin-top: 40px;
         flex-wrap: wrap;
+
+        grid-template-columns: repeat(5, 1fr);
+
+        &:where(.active) {
+            grid-template-columns: repeat(4, 1fr)
+        }
     }
 
 }

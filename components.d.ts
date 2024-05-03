@@ -19,6 +19,7 @@ declare module 'vue' {
     ItemCom: typeof import('./src/components/ItemCom.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SelectCom: typeof import('./src/components/SelectCom.vue')['default']
     SortCom: typeof import('./src/components/SortCom.vue')['default']
   }
 }

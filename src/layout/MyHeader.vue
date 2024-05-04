@@ -21,7 +21,7 @@
             <div class="television__user-control" @click="changePopupFlag(true)"><el-icon>
                     <ChatDotSquare />
                 </el-icon>求片</div>
-            <div class="television__user-avatar">
+            <div @click="open = true" class="television__user-avatar">
 
             </div>
         </div>
@@ -34,12 +34,17 @@
             <el-button type="primary" @click="onSubmit">点击提交</el-button>
         </template>
     </el-dialog>
+    <el-dialog class="login-dialog" v-model="open">
+        <LoginCom />
+    </el-dialog>
 </template>
 
 <script setup lang="ts">
+import LoginCom from '@/components/LoginCom.vue';
 import { ref } from 'vue'
 import { useRouter, useRoute } from "vue-router"
 import { Search, ChatDotSquare, PieChart } from '@element-plus/icons-vue'
+const open = ref(false)
 const active = ref(0)
 const router = useRouter()
 const route = useRoute()
@@ -104,6 +109,14 @@ const onSubmit = () => {
 </script>
 
 <style lang="scss">
+.login-dialog {
+    padding: 0;
+
+    .el-dialog__header {
+        display: none;
+    }
+}
+
 .television-header {
     width: 1188px;
     color: white;

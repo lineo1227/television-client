@@ -8,15 +8,15 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ChoiceCom: typeof import('./src/components/ChoiceCom.vue')['default']
-    ChoicePanelCom: typeof import('./src/components/ChoicePanelCom.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElIcon: typeof import('element-plus/es')['ElIcon']
-    ElImage: typeof import('element-plus/es')['ElImage']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElPagination: typeof import('element-plus/es')['ElPagination']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
+    ElTour: typeof import('element-plus/es')['ElTour']
     ItemCom: typeof import('./src/components/ItemCom.vue')['default']
+    LoginCom: typeof import('./src/components/LoginCom.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SelectCom: typeof import('./src/components/SelectCom.vue')['default']

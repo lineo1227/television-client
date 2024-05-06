@@ -15,6 +15,13 @@ $color-white-light: rgba(255, 255, 255, 0.7);
   right: $r;
   bottom: $b;
 }
+@mixin border() {
+  background-clip: padding-box, border-box;
+  border: 2px solid transparent;
+  background-origin: padding-box, border-box;
+  background-image: linear-gradient(to right, $color-purple-light, $color-purple-light),
+    $border-color;
+}
 @mixin boxPadding($pd) {
   padding: $pd;
   box-sizing: border-box;

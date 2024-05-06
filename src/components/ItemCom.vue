@@ -1,22 +1,25 @@
 <template>
-    <li class="item">
+    <li class="item" @click="pathTo">
         <img src="@/assets/images/test.png" alt="">
         <h5>死侍：危险行为 </h5>
         <span>49亿票房燃爆国漫</span>
     </li>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const pathTo = () => {
+    router.push('/details/111')
+}
+</script>
 
 <style lang="scss">
 .item {
     height: 406px;
     width: 230px;
-    border: 2px solid transparent;
     border-radius: 6px;
-    background-clip: padding-box, border-box;
-    background-origin: padding-box, border-box;
-    background-image: linear-gradient(to right, $color-purple-light, $color-purple-light), $border-color;
+    @include border;
     cursor: pointer;
     @include flex($ai: center, $fd: column);
     font-size: 16px;

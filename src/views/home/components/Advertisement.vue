@@ -82,16 +82,6 @@ import { StarFilled } from "@element-plus/icons-vue"
                 border-color: lighten($color: $color-purple, $amount: 10%);
             }
         }
-
-        &-watch {
-            background-color: $color-purple;
-            border-color: $color-purple;
-
-            &:hover {
-                background-color: lighten($color: $color-purple, $amount: 10%);
-                border-color: lighten($color: $color-purple, $amount: 10%);
-            }
-        }
     }
 }
 </style>

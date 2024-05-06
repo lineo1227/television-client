@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    BingeWatch: typeof import('./src/components/BingeWatch.vue')['default']
     ChoiceCom: typeof import('./src/components/ChoiceCom.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElDialog: typeof import('element-plus/es')['ElDialog']

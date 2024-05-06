@@ -114,7 +114,7 @@ label {
     margin: 12px auto 10%;
     color: #fff;
     background: lighten($color: $color-purple-light, $amount: 20);
-    font-size: 1rem;
+    font-size: 20px;
     font-weight: bold;
     border: none;
     border-radius: 4px;

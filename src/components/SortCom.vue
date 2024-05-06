@@ -54,11 +54,9 @@ const { title, digest, add } = withDefaults(defineProps<{
     }
 
     &-content {
-        // @include flex;
         display: grid;
         margin-top: 40px;
         flex-wrap: wrap;
-
         grid-template-columns: repeat(5, 1fr);
 
         &:where(.active) {

@@ -29,7 +29,7 @@ import ItemCom from "@/components/ItemCom.vue";
 import HotItem from "./components/HotItem.vue"
 import Advertisement from "./components/Advertisement.vue"
 import SortCom from "@/components/SortCom.vue"
-import BingeWatch from "./components/BingeWatch.vue";
+import BingeWatch from "@/components/BingeWatch.vue";
 </script>
 
 <style lang="scss">

@@ -73,11 +73,8 @@ const changeList = (item: ListType, it: string) => {
     width: 100%;
     @include boxPadding(30px 40px);
     height: 310px;
-    border: 2px solid transparent;
     border-radius: 6px;
-    background-clip: padding-box, border-box;
-    background-origin: padding-box, border-box;
-    background-image: linear-gradient(to right, $color-purple-light, $color-purple-light), $border-color;
+    @include border;
 }
 
 .choice-list {

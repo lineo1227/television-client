@@ -11,7 +11,7 @@
             </p>
             <p>类型: 动作 / 科幻 / 恐怖 / 奇幻 </p>
             <div class="content-btn">
-                <el-button class="content-btn-watch" type="primary">立即观看</el-button>
+                <el-button @click="playFlag = true" class="content-btn-watch" type="primary">立即观看</el-button>
                 <el-button class="content-btn-collect">点击收藏</el-button>
             </div>
             <ul class="content-desc">
@@ -41,6 +41,8 @@
 
 <script setup lang="ts">
 import { StarFilled } from "@element-plus/icons-vue"
+import { defineModel } from "vue";
+const playFlag = defineModel()
 </script>
 
 <style scoped lang="scss">

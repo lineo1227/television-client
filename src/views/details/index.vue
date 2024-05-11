@@ -1,7 +1,8 @@
 <template>
     <div class="details">
         <div class="details__container">
-            <DetailsContent />
+            <VideoContent v-show="playFlag" />
+            <DetailsContent v-show="!playFlag" v-model="playFlag" />
             <div class="details__container-digest">
                 <h4>电影简介</h4>
                 <p>在与灭霸的终极决战结束后，“蚁人”斯科特·朗（保罗·路德 Paul Rudd 饰）和“黄蜂女”霍普·凡·戴恩（伊万杰琳·莉莉 Evangeline Lilly
@@ -20,11 +21,14 @@
 </template>
 
 <script setup lang="ts">
+import VideoContent from "./components/VideoContent.vue"
 import Upload from "./components/Upload.vue"
 import ItemCom from "@/components/ItemCom.vue";
 import SortCom from "@/components/SortCom.vue"
 import BingeWatch from "@/components/BingeWatch.vue";
 import DetailsContent from "./components/DetailsContent.vue"
+import { ref } from "vue";
+const playFlag = ref(false)
 </script>
 
 <style lang="scss">

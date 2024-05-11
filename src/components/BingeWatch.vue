@@ -1,9 +1,9 @@
 <template>
     <div class="binge-watch">
-        <img src="@/assets/images/binge-watch.png" alt="">
+        <img :src="img" alt="">
         <div class="binge-watch-content">
-            <h2>追剧WEEK</h2>
-            <h3>每个星期都更新哦</h3>
+            <h2>{{ title }}</h2>
+            <h3>{{ desc }}</h3>
             <ul>
                 <li v-for="item in 5">
                     <img src="@/assets/images/binge-watch-item.png" alt="">
@@ -15,7 +15,18 @@
     </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { withDefaults } from "vue"
+const { title, desc, img } = withDefaults(defineProps<{
+    title: string,
+    desc: string,
+    img: string
+}>(), {
+    title: '追剧WEEK',
+    desc: "每个星期都更新哦",
+    img: ''
+})
+</script>
 
 <style lang="scss">
 .binge-watch {

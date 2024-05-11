@@ -12,7 +12,7 @@
                 <Upload />
 
             </div>
-            <BingeWatch />
+            <BingeWatch :img="img" title="同类影视推荐" desc="一次看个够!" />
             <SortCom title="猜你喜欢" digest="超级英雄 漫威宇宙 ">
                 <ItemCom v-for="item in 5"></ItemCom>
             </SortCom>
@@ -21,6 +21,7 @@
 </template>
 
 <script setup lang="ts">
+import img from "@/assets/images/binge-watch2.png"
 import VideoContent from "./components/VideoContent.vue"
 import Upload from "./components/Upload.vue"
 import ItemCom from "@/components/ItemCom.vue";

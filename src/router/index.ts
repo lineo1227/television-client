@@ -7,6 +7,7 @@ import Vip from "@/views/vip/index.vue"
 import Brower from "@/views/brower/index.vue"
 import Search from "@/views/search/index.vue"
 import Details from "@/views/details/index.vue"
+import User from "@/views/user/index.vue"
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -48,6 +49,10 @@ const router = createRouter({
       path: '/details/:id',
       name: 'details',
       component: Details
+    }, {
+      path: '/user',
+      name: 'user',
+      component: User
     }
 
   ]

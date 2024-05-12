@@ -23,12 +23,15 @@
 
 <script setup lang="ts">
 import { ref, defineModel } from 'vue';
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const toggleFlag = ref(true)
 const open = defineModel()
 const submit = (event: Event) => {
     open.value = false
-    console.log(open.value)
     event.preventDefault()
+    localStorage.setItem('television-userInfo', JSON.stringify({ id: 1, name: 'admin' }))
+    router.push('/')
 }
 </script>
 

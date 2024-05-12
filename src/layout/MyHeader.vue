@@ -30,7 +30,7 @@
             <div class="television__user-control" @click="changePopupFlag(true)"><el-icon>
                     <ChatDotSquare />
                 </el-icon>求片</div>
-            <div @click="open = true" class="television__user-avatar">
+            <div @click="goHome" class="television__user-avatar">
 
             </div>
         </div>
@@ -68,6 +68,14 @@ interface RouterType {
     id: number,
     name: string,
     path: string
+}
+const goHome = () => {
+    const userInfo = !!localStorage.getItem("television-userInfo")
+    if (userInfo) {
+        router.push('/user')
+    } else {
+        open.value = true
+    }
 }
 const flurBoxFlag = ref(false)
 const routerList = ref<RouterType[]>([

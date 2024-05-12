@@ -20,8 +20,13 @@
     background-image: linear-gradient(to right, #1c1b25, #1c1b25),
         $border-color;
 
-    &-btn {
+    button {
+        padding: 0 16px;
+        height: 36px;
         font-size: 12px;
+    }
+
+    &-btn {
         line-height: 16px;
         background-color: rgba(255, 255, 255, 0.05);
         border: 1px solid rgba(255, 255, 255, 0.5);

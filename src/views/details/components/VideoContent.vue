@@ -1,6 +1,7 @@
 <template>
     <div class="video-content">
-        <vue3VideoPlay width="100%" title="冰河世纪" :src="options.src" :type="options.type" :autoPlay="false" />
+        <vue3VideoPlay width="100%" height="100%" title="冰河世纪" :src="options.src" :type="options.type"
+            :autoPlay="false" />
     </div>
 </template>
 

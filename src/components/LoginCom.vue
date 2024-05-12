@@ -1,17 +1,17 @@
 <template>
     <div class="user-control">
-        <div class="login" :class="loginFlag && 'active'">
-            <form class="form">
-                <label for="chk" @click="loginFlag = true">Log in</label>
+        <div class="login" :class="toggleFlag && 'active'">
+            <form class="form" @submit="submit">
+                <label for="chk" @click="toggleFlag = true">Log in</label>
                 <input class="input" type="email" name="email" placeholder="Email">
                 <input class="input" type="password" name="pswd" placeholder="Password">
                 <button>Log in</button>
             </form>
         </div>
 
-        <div class="register" :class="!loginFlag && 'active'">
-            <form class="form">
-                <label for="chk" @click="loginFlag = false">Register</label>
+        <div class="register" :class="!toggleFlag && 'active'">
+            <form class="form" @submit="submit">
+                <label for="chk" @click="toggleFlag = false">Register</label>
                 <input class="input" type="text" name="txt" placeholder="Username">
                 <input class="input" type="email" name="email" placeholder="Email">
                 <input class="input" type="password" name="pswd" placeholder="Password">
@@ -22,9 +22,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
-const loginFlag = ref(true)
+import { ref, defineModel } from 'vue';
+const toggleFlag = ref(true)
+const open = defineModel()
+const submit = (event: Event) => {
+    open.value = false
+    console.log(open.value)
+    event.preventDefault()
+}
 </script>
 
 <style scoped lang="scss">

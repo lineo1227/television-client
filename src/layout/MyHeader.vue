@@ -9,8 +9,17 @@
                 {{ item.name }}</li>
         </ul>
         <div class="television__search">
-            <el-input v-model="input2" @keyup.enter="pathTo('/search?key=' + input2)" placeholder="猫和老鼠"
-                :suffix-icon="Search" />
+            <FlurBox v-model="flurBoxFlag" v-show="searchSlotFlag">
+                <ul class="kind-list">
+                    <li @click="kind = item" v-for="item in kindList" :key="item" :class="item === kind && 'active'">{{
+                item }}</li>
+                </ul>
+                <ul class="kind-hot">
+                    <li v-for="item in 4" :key="item"> <span :class='"hot-" + item'>{{ item }}</span> {{ kind }}</li>
+                </ul>
+            </FlurBox>
+            <el-input v-model="input2" @focus="changeHotSearchFlag(true)" @blur="changeHotSearchFlag(false)"
+                @keyup.enter="pathTo('/search?key=' + input2)" placeholder="猫和老鼠" :suffix-icon="Search" />
         </div>
         <div class="television__user">
             <div class="television__user-record" @click="pathTo('/brower')">
@@ -35,16 +44,23 @@
         </template>
     </el-dialog>
     <el-dialog class="login-dialog" v-model="open">
-        <LoginCom />
+        <LoginCom v-model="open" />
     </el-dialog>
 </template>
 
 <script setup lang="ts">
 import LoginCom from '@/components/LoginCom.vue';
-import { ref } from 'vue'
+import FlurBox from "@/components/FlurBox.vue"
+import { ref, watch } from 'vue';
 import { useRouter, useRoute } from "vue-router"
 import { Search, ChatDotSquare, PieChart } from '@element-plus/icons-vue'
 const open = ref(false)
+const kind = ref("热门搜素")
+const kindList = ref([
+    "热门搜素",
+    "电影",
+    "动漫",
+])
 const active = ref(0)
 const router = useRouter()
 const route = useRoute()
@@ -53,6 +69,7 @@ interface RouterType {
     name: string,
     path: string
 }
+const flurBoxFlag = ref(false)
 const routerList = ref<RouterType[]>([
     { id: 0, name: '首页', path: '/' },
     { id: 1, name: '全部', path: '/all' },
@@ -106,9 +123,80 @@ const onSubmit = () => {
     })
 
 }
+
+const searchSlotFlag = ref(false)
+const searchInputFlag = ref(false)
+const changeHotSearchFlag = (bool: boolean) => {
+    searchInputFlag.value = bool
+    if (!searchInputFlag.value && !flurBoxFlag.value) {
+        searchSlotFlag.value = bool
+
+    }
+}
+watch([searchInputFlag, flurBoxFlag], ([n], [n2]) => {
+    if (!n) {
+        if (n2) {
+            return
+        }
+    }
+    searchSlotFlag.value = n
+})
 </script>
 
 <style lang="scss">
+.kind {
+    &-list {
+        @include flex($ai: center);
+        margin-bottom: 16px;
+
+        li {
+            cursor: pointer;
+            font-size: 18px;
+            color: $color-white-light;
+            margin-right: 20px;
+
+            &.active {
+                color: white;
+            }
+        }
+    }
+
+    &-hot {
+        font-size: 16px;
+
+        li {
+            @include flex($ai: center);
+            cursor: pointer;
+
+            span {
+                height: 18px;
+                width: 18px;
+                background: linear-gradient(134.43deg, rgba(125, 18, 255, 0.2) 0%, rgba(255, 141, 26, 0.2) 100%);
+                margin-right: 8px;
+                font-size: 12px;
+                text-align: center;
+                line-height: 18px;
+                border-radius: 2px;
+                color: whitesmoke;
+
+                &.hot-1 {
+                    background: linear-gradient(134.43deg, rgba(125, 18, 255, 1) 0%, rgba(255, 141, 26, 0.72) 100%);
+                }
+
+                &.hot-2 {
+                    background: linear-gradient(134.43deg, rgba(125, 18, 255, .8) 0%, rgba(255, 141, 26, 0.6) 100%);
+                }
+
+                &.hot-3 {
+                    background: linear-gradient(134.43deg, rgba(125, 18, 255, .5) 0%, rgba(255, 141, 26, 0.4) 100%);
+                }
+            }
+
+            padding: 10px 0;
+        }
+    }
+}
+
 .login-dialog {
     padding: 0;
 
@@ -131,20 +219,22 @@ const onSubmit = () => {
         h3 {
             text-align: center;
             color: white;
-            font-size: 24px;
+            font-size: 20px;
         }
 
         .message {
-            font-size: 20px;
+            font-size: 16px;
             text-align: center;
             color: $color-white-light;
-            margin: 40px 0;
+            margin: 20px 0;
         }
 
         .el-button {
             background-color: $color-purple;
             border-color: $color-purple;
-            margin-top: 10px;
+            height: 26px;
+            padding: 0 10px;
+            font-size: 12px;
 
             &:hover {
                 background-color: lighten($color: $color-purple, $amount: 10%);
@@ -207,6 +297,7 @@ const onSubmit = () => {
         &__search {
             margin-left: 68px;
             width: 200px;
+            position: relative;
 
             .el-input__wrapper {
                 background: rgba(204, 204, 204, 0.28);

@@ -26,9 +26,9 @@ $color-white-light: rgba(255, 255, 255, 0.7);
   padding: $pd;
   box-sizing: border-box;
 }
-@mixin RouterCss() {
+@mixin RouterCss($min-height: 100vh) {
   color: white;
-  min-height: 100vh;
+  min-height: $min-height;
 
   .el-pagination {
     .btn-prev:disabled,

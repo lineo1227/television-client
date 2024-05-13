@@ -31,7 +31,7 @@
                                 </el-icon>
                             </li>
                         </ul>
-                        <el-button>退出登录</el-button>
+                        <el-button @click="exit">退出登录</el-button>
                     </FlurBox>
                 </div>
             </div>
@@ -61,6 +61,12 @@
 <script setup lang="ts">
 import FlurBox from "./components/FlurBox.vue"
 import { ArrowRight } from "@element-plus/icons-vue"
+import { useRouter } from "vue-router"
+const router = useRouter();
+const exit = () => {
+    localStorage.removeItem("television-userInfo")
+    router.push("/")
+}
 </script>
 
 <style lang="scss">

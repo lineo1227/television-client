@@ -22,47 +22,45 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-const active = ref(0)
-interface ListType {
-    name: string,
-    check: string,
-    list: string[]
-}
-const list = ref<ListType[]>([{
-    name: "分类",
-    check: "电影",
-    list: [
-        "电影", "动漫", "儿童"
-    ]
-}, {
-    name: "资费",
-    check: "全部",
-    list: [
-        "全部", "免费", "会员"
-    ]
-}, {
-    name: "类型",
-    check: "全部",
-    list: [
-        "全部", "动漫", "儿童"
-    ]
-}, {
-    name: "年代",
-    check: "全部",
-    list: [
-        "全部", "2023", "2022", "2021", "2020", "更早"
-    ]
-}, {
-    name: "地区",
-    check: "全部",
-    list: [
-        "全部", "内地", "欧美", "港台", "日本", "韩国", "其他"
-    ]
-},
-])
+import { ref, defineModel } from 'vue';
+import type { ChoiceListType } from '@/views/all/index.vue';
+const active = defineModel('active')
+
+const list = defineModel<ChoiceListType[]>('list')
+// const list = ref<ListType[]>([{
+//     name: "分类",
+//     check: "电影",
+//     list: [
+//         "电影", "动漫", "儿童"
+//     ]
+// }, {
+//     name: "资费",
+//     check: "全部",
+//     list: [
+//         "全部", "免费", "会员"
+//     ]
+// }, {
+//     name: "类型",
+//     check: "全部",
+//     list: [
+//         "全部", "动漫", "儿童"
+//     ]
+// }, {
+//     name: "年代",
+//     check: "全部",
+//     list: [
+//         "全部", "2023", "2022", "2021", "2020", "更早"
+//     ]
+// }, {
+//     name: "地区",
+//     check: "全部",
+//     list: [
+//         "全部", "内地", "欧美", "港台", "日本", "韩国", "其他"
+//     ]
+// },
+// ])
 const btns = ref([{ name: "本周热播" }, { name: "历史热播", }, { name: "最新上线", }, { name: "最受欢迎", }])
-const changeList = (item: ListType, it: string) => {
+const changeList = (item: ChoiceListType, it: string) => {
     item.check = it
 }
 </script>

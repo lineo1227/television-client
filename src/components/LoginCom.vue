@@ -3,8 +3,8 @@
         <div class="login" :class="toggleFlag && 'active'">
             <form class="form" @submit="submit">
                 <label for="chk" @click="toggleFlag = true">Log in</label>
-                <input class="input" type="email" name="email" placeholder="Email">
-                <input class="input" type="password" name="pswd" placeholder="Password">
+                <input class="input" v-model="username" name="text" placeholder="username">
+                <input class="input" v-model="password" type="password" name="pswd" placeholder="Password">
                 <button>Log in</button>
             </form>
         </div>
@@ -24,14 +24,39 @@
 <script setup lang="ts">
 import { ref, defineModel } from 'vue';
 import { useRouter } from 'vue-router'
+import { userLogin } from "@/api"
+import { useUserInfoStore } from '@/stores';
 const router = useRouter()
 const toggleFlag = ref(true)
 const open = defineModel()
+const userInfoStore = useUserInfoStore()
+const username = ref("")
+const password = ref("")
 const submit = (event: Event) => {
-    open.value = false
-    event.preventDefault()
-    localStorage.setItem('television-userInfo', JSON.stringify({ id: 1, name: 'admin' }))
-    router.push('/')
+    if (toggleFlag.value) {
+        event.preventDefault()
+        if (username.value === "" || password.value === "") return
+        userLogin(username.value, password.value).then(({ data }) => {
+            const { code, message, data: r } = data as { code: number, data: { id: number, token: string, username: string }, message: string }
+            if (code === 200) {
+                ElMessage({
+                    message: '登陆成功',
+                    type: 'success',
+                })
+                userInfoStore.user = r
+                open.value = false
+            } else {
+                ElMessage({
+                    message: message,
+                    type: 'warning',
+                })
+            }
+        })
+    }
+    /*  open.value = false
+     event.preventDefault()
+     localStorage.setItem('television-userInfo', JSON.stringify({ id: 1, name: 'admin' }))
+     router.push('/') */
 }
 </script>
 

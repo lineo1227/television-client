@@ -5,10 +5,10 @@
             <h2>{{ title }}</h2>
             <h3>{{ desc }}</h3>
             <ul>
-                <li v-for="item in 5">
-                    <img src="@/assets/images/binge-watch-item.png" alt="">
-                    <h5>请加我总监</h5>
-                    <span>新旧许文强再战上海滩</span>
+                <li v-for="item in itemList" @click="pathTo(item.id)" :key="item.id">
+                    <img :src="item.coverUrl" alt="">
+                    <h5>{{ item.title }}</h5>
+                    <span>{{ dayjs(item.year).format('YYYY-MM-DD') }}</span>
                 </li>
             </ul>
         </div>
@@ -16,16 +16,27 @@
 </template>
 
 <script setup lang="ts">
+import dayjs from "dayjs"
+import type { Item } from "@/views/home/index.vue";
 import { withDefaults } from "vue"
+import { useRouter } from "vue-router"
+
+const router = useRouter()
+
 const { title, desc, img } = withDefaults(defineProps<{
-    title: string,
-    desc: string,
-    img: string
+    title?: string,
+    desc?: string,
+    img: string,
+    itemList?: Item[],
 }>(), {
     title: '追剧WEEK',
     desc: "每个星期都更新哦",
-    img: ''
+    img: '',
+    itemList: () => []
 })
+function pathTo(id: number) {
+    router.push("/details/" + id)
+}
 </script>
 
 <style lang="scss">
@@ -59,17 +70,20 @@ const { title, desc, img } = withDefaults(defineProps<{
 
         ul {
             margin-top: 64px;
-            @include flex($jc: space-between, $ai: center)
+            @include flex($ai: center)
         }
 
         li {
             height: 186px;
             width: 200px;
-
+            margin-right: 36px;
             @include flex($jc: space-between, $fd: column);
+            cursor: pointer;
 
             img {
                 height: 120px;
+                object-fit: cover;
+                border-radius: 10px;
             }
 
             h5 {

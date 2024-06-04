@@ -3,7 +3,8 @@
         <div class="sort-com-title">
             <h3>{{ title }}</h3>
             <span>{{ digest }}</span>
-            <el-button size="small" v-if="add" type="primary" class="sort-com-btn"> 查看更多</el-button>
+            <el-button size="small" @click="pathTo('/search?key=正在热播')" v-if="add" type="primary" class="sort-com-btn">
+                查看更多</el-button>
         </div>
         <ul :class="add ? 'active' : ''" class="sort-com-content">
             <slot></slot>
@@ -13,15 +14,20 @@
 
 <script setup lang="ts">
 import { withDefaults } from 'vue';
+import { useRouter } from "vue-router"
 const { title, digest, add } = withDefaults(defineProps<{
-    title: string,
-    digest: string,
-    add: boolean
+    title?: string,
+    digest?: string,
+    add?: boolean
 }>(), {
     title: '',
     digest: "",
     add: false,
 })
+const router = useRouter()
+function pathTo(url: string) {
+    router.push(url)
+}
 </script>
 
 <style scoped lang="scss">

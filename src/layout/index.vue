@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import { RouterView } from 'vue-router';
 import MyHeader from './MyHeader.vue';
 import MyFooter from './MyFooter.vue';
 </script>

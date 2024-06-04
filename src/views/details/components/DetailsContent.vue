@@ -1,37 +1,38 @@
 <template>
     <div class="details-content">
-        <img src="@/assets/images/test.png" alt="">
+        <img :src="video?.videoWithRating[0]?.coverUrl" alt="">
         <div class="content-message">
-            <h3>蚁人与黄蜂女：量子狂潮</h3>
-            <p>英语·2021年·133分</p>
+            <h3>{{ video?.videoWithRating[0]?.title }}</h3>
+            <p>{{ video?.videoWithRating[0].language }}·{{ dayjs(video?.videoWithRating[0]?.year).format("YYYY年")
+                }}·{{ video?.videoWithRating[0]?.duration }}分</p>
             <p class="active">
                 <el-icon>
                     <StarFilled />
-                </el-icon>(4.8/5.0)
+                </el-icon>({{ video?.videoWithRating[0]?.rating }}/10.0)
             </p>
-            <p>类型: 动作 / 科幻 / 恐怖 / 奇幻 </p>
+            <p>类型: {{ video?.videoTypeList.join(" / ") }}</p>
             <div class="content-btn">
                 <el-button @click="playFlag = true" class="content-btn-watch" type="primary">立即观看</el-button>
-                <el-button class="content-btn-collect">点击收藏</el-button>
+                <el-button class="content-btn-collect" @click="handleCollect">点击收藏</el-button>
             </div>
             <ul class="content-desc">
                 <li>
-                    <h4>4.8+</h4>
+                    <h4>{{ video?.videoWithRating[0]?.rating }}+</h4>
                     <span>73619人评分</span>
                 </li>
                 <li class="normal"></li>
                 <li>
-                    <h4>英语</h4>
+                    <h4>{{ video?.videoWithRating[0].language }}</h4>
                     <span>电影语言</span>
                 </li>
                 <li class="normal"></li>
                 <li>
-                    <h4>2017</h4>
+                    <h4>{{ dayjs(video?.videoWithRating[0]?.year).format("YYYY年") }}</h4>
                     <span>上映日期</span>
                 </li>
                 <li class="normal"></li>
                 <li>
-                    <h4>133分</h4>
+                    <h4>{{ video?.videoWithRating[0]?.duration }}分</h4>
                     <span>电影片长</span>
                 </li>
             </ul>
@@ -41,8 +42,41 @@
 
 <script setup lang="ts">
 import { StarFilled } from "@element-plus/icons-vue"
-import { defineModel } from "vue";
+import { defineModel, withDefaults } from "vue";
+import type { Video } from "../index.vue";
+import { setCollect } from "@/api";
+import dayjs from 'dayjs';
+import { useUserInfoStore } from "@/stores";
 const playFlag = defineModel()
+const { video, vid } = withDefaults(defineProps<{
+    video: Video | null,
+    vid?: string
+}>(), {
+    video: null,
+    vid: ""
+})
+const token = useUserInfoStore().user?.token
+function handleCollect() {
+    setCollect(vid, token as string).then(({ data }) => {
+        const { data: d } = data as { data: number }
+        if (d === 1) {
+            ElMessage({
+                message: '收藏成功',
+                type: 'success',
+            })
+        } else if (d === 0) {
+            ElMessage({
+                message: '取消收藏',
+                type: 'info',
+            })
+        } else {
+            ElMessage({
+                message: '收藏失败',
+                type: 'error',
+            })
+        }
+    })
+}
 </script>
 
 <style scoped lang="scss">

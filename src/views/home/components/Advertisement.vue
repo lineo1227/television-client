@@ -1,24 +1,61 @@
 <template>
     <div class="advertisement">
-        <div class="advertisement-title">神奇蜘蛛侠</div>
-        <div class="advertisement-digest">
+        <div class="advertisement-title">{{ video?.videoWithRating[0].title }}</div>
+        <div class="advertisement-digest" v-if="video">
             <span><el-icon>
                     <StarFilled />
-                </el-icon>(4.8/5.0)</span>
-            类型: 动作 / 科幻 / 恐怖 / 奇幻 / 冒险
+                </el-icon>({{ video?.videoWithRating[0].rating }}/10.0)</span>
+            类型: {{ video.videoTypeList.join(" / ") }}
         </div>
         <div class="advertisement-desc">
-            奇异博士斯蒂芬·斯特兰奇正在参加他的单恋对象克里斯汀·帕尔默的婚礼，这时外面的街道上出了乱子。一只巨大的章鱼怪正在跨越维度追逐名叫阿美莉卡·查维兹少的远古魔法师穿越到现在入侵地球的时代...
+            {{ video?.videoWithRating[0].description }}
         </div>
         <div class="advertisement-btn">
-            <el-button class="advertisement-btn-watch" type="primary">立即观看</el-button>
-            <el-button class="advertisement-btn-collect">点击收藏</el-button>
+            <el-button class="advertisement-btn-watch" type="primary" @click="pathTo('/details/33')">立即观看</el-button>
+            <el-button class="advertisement-btn-collect" @click="handleCollect">点击收藏</el-button>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import { StarFilled } from "@element-plus/icons-vue"
+import { getVideoDetail, setCollect } from "@/api"
+import type { Video } from "@/views/details/index.vue"
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useUserInfoStore } from '@/stores';
+const video = ref<Video | null>(null)
+const router = useRouter()
+const store = useUserInfoStore()
+getVideoDetail('33').then(({ data }) => {
+    const { data: v } = data as { data: Video }
+    video.value = v
+})
+function pathTo(url: string) {
+    router.push(url)
+}
+function handleCollect() {
+    setCollect(33, store.user?.token as string).then(({ data }) => {
+        const { data: d } = data as { data: number }
+        if (d === 1) {
+            ElMessage({
+                message: '收藏成功',
+                type: 'success',
+            })
+        } else if (d === 0) {
+            ElMessage({
+                message: '取消收藏',
+                type: 'info',
+            })
+        } else {
+            ElMessage({
+                message: '收藏失败',
+                type: 'error',
+            })
+            store.user = null
+        }
+    })
+}
 </script>
 
 <style lang="scss">
@@ -33,6 +70,7 @@ import { StarFilled } from "@element-plus/icons-vue"
     }
 
     &-title {
+        white-space: nowrap;
         font-size: 64px;
         letter-spacing: 4px;
     }
@@ -40,6 +78,7 @@ import { StarFilled } from "@element-plus/icons-vue"
     &-digest {
         font-size: 16px;
         color: $color-white-light;
+        line-height: 20px;
 
         span {
             .el-icon {
@@ -56,6 +95,12 @@ import { StarFilled } from "@element-plus/icons-vue"
         color: $color-white-light;
         font-size: 16px;
         line-height: 20px;
+        height: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
     }
 
     &-btn {

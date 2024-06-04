@@ -1,16 +1,16 @@
 <template>
-    <li class="hot-item">
-        <img src="@/assets/images/hot-item.png" alt="">
-        <h5>好像也没那么热血沸腾</h5>
-        <span>类型: 动作 / 科幻 / 动画 / 冒险</span>
+    <li class="hot-item" @click="pathTo(item.id)">
+        <img :src="item.coverUrl" alt="">
+        <h5>{{ item.title }}</h5>
+        <span>{{ item.typeList?.join("/") }}</span>
         <div class="hot-item-digest">
             <p>
                 <span><el-icon>
                         <StarFilled />
-                    </el-icon>(4.8/5.0)</span> <span>漫威英雄系列</span>
+                    </el-icon>({{ item.rating }}/10.0)</span> <span>漫威英雄系列</span>
             </p>
             <p>
-                <span>230万人看过</span> <span>分享给朋友观看</span>
+                <span>{{ item.playCount }}人看过</span> <span>分享给朋友观看</span>
             </p>
         </div>
     </li>
@@ -18,6 +18,27 @@
 
 <script setup lang="ts">
 import { StarFilled } from "@element-plus/icons-vue"
+import { withDefaults } from 'vue';
+import type { Item } from '@/views/home/index.vue';
+import dayjs from "dayjs"
+import { useRouter } from 'vue-router';
+interface ItemType extends Item {
+    year?: string,
+    rating?: number,
+    playCount?: number
+}
+interface Props {
+    item: ItemType
+}
+withDefaults(defineProps<Props>(), {
+    item: () => ({ id: -1, title: '暂无数据', coverUrl: '@/assets/images/test.png', year: dayjs().format('YYYY-MM-DD'), rating: 0, playCount: 0 })
+})
+const router = useRouter()
+const pathTo = (id: number) => {
+    router.push({
+        path: `/details/${id}`
+    })
+}
 </script>
 
 <style lang="scss">

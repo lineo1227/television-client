@@ -1,16 +1,29 @@
 <template>
     <li class="item" @click="pathTo">
-        <img src="@/assets/images/test.png" alt="">
-        <h5>死侍：危险行为 </h5>
-        <span>49亿票房燃爆国漫</span>
+        <img :src="item.coverUrl" loading="lazy" alt="">
+        <h5>{{ item.title }} </h5>
+        <span>{{ dayjs(item.year).format('YYYY-MM-DD') }}</span>
     </li>
 </template>
 
 <script setup lang="ts">
+import { withDefaults } from 'vue';
+import type { Item } from '@/views/home/index.vue';
+import dayjs from "dayjs"
+interface ItemType extends Item {
+    year?: string
+}
+interface Props {
+    item: ItemType
+}
+const { item } = withDefaults(defineProps<Props>(), {
+    item: () => ({ id: -1, title: '暂无数据', coverUrl: '@/assets/images/test.png', year: dayjs().format('YYYY-MM-DD') })
+})
+
 import { useRouter } from 'vue-router'
 const router = useRouter()
 const pathTo = () => {
-    router.push('/details/111')
+    router.push(`/details/${item.id}`)
 }
 </script>
 

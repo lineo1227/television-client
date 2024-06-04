@@ -62,9 +62,10 @@
 import FlurBox from "./components/FlurBox.vue"
 import { ArrowRight } from "@element-plus/icons-vue"
 import { useRouter } from "vue-router"
+import { useUserInfoStore } from "@/stores";
 const router = useRouter();
 const exit = () => {
-    localStorage.removeItem("television-userInfo")
+    useUserInfoStore().user = null;
     router.push("/")
 }
 </script>

@@ -11,11 +11,15 @@
         <div class="television__search">
             <FlurBox v-model="flurBoxFlag" v-show="searchSlotFlag">
                 <ul class="kind-list">
-                    <li @click="kind = item" v-for="item in kindList" :key="item" :class="item === kind && 'active'">{{
-                item }}</li>
+                    <li @click="kind = item.tag" v-for="item in kindList" :key="item.tag"
+                        :class="item.tag === kind && 'active'">{{
+                item.name }}</li>
                 </ul>
                 <ul class="kind-hot">
-                    <li v-for="item in 4" :key="item"> <span :class='"hot-" + item'>{{ item }}</span> {{ kind }}</li>
+                    <li @click="router.push(`/details/${item.id}`)" v-for="(item, index) in list[kind].slice(0, 4)"
+                        :key="item.id"> <span :class='"hot-" + (index + 1)'>{{
+                index + 1
+            }}</span> {{ item.title }}</li>
                 </ul>
             </FlurBox>
             <el-input v-model="input2" @focus="changeHotSearchFlag(true)" @blur="changeHotSearchFlag(false)"
@@ -54,12 +58,18 @@ import FlurBox from "@/components/FlurBox.vue"
 import { ref, watch } from 'vue';
 import { useRouter, useRoute } from "vue-router"
 import { Search, ChatDotSquare, PieChart } from '@element-plus/icons-vue'
+import { useHotSearchListStore, useUserInfoStore } from '@/stores';
+import { storeToRefs } from "pinia"
+const hotSearchListStore = useHotSearchListStore()
+const userInfoStore = useUserInfoStore()
+
+const { list } = storeToRefs(hotSearchListStore)
 const open = ref(false)
-const kind = ref("热门搜素")
-const kindList = ref([
-    "热门搜素",
-    "电影",
-    "动漫",
+const kind = ref<"default" | "movie" | "anime">("default")
+const kindList = ref<{ name: string, tag: "default" | "movie" | "anime" }[]>([
+    { name: "热门搜索", tag: "default" },
+    { name: "电影", tag: "movie" },
+    { name: "动漫", tag: "anime" },
 ])
 const active = ref(0)
 const router = useRouter()
@@ -70,8 +80,8 @@ interface RouterType {
     path: string
 }
 const goHome = () => {
-    const userInfo = !!localStorage.getItem("television-userInfo")
-    if (userInfo) {
+    const userInfo = userInfoStore.user
+    if (userInfo?.token) {
         router.push('/user')
     } else {
         open.value = true

@@ -3,7 +3,7 @@
         <div class="home__bg">
             <Advertisement />
             <img style="position: absolute;top:0;left:0;width: 100%;height: 100%;object-fit: cover;z-index: -1;"
-                src="@/assets/images/zzx.png" alt="">
+                src="@/assets/svg/zzx.svg" alt="">
 
         </div>
         <div class="home__container">

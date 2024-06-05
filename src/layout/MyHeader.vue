@@ -16,8 +16,9 @@
                 item.name }}</li>
                 </ul>
                 <ul class="kind-hot">
-                    <li @click="router.push(`/details/${item.id}`)" v-for="(item, index) in list[kind].slice(0, 4)"
-                        :key="item.id"> <span :class='"hot-" + (index + 1)'>{{
+                    <li @click="router.push(`/search?key=${item.title}`)"
+                        v-for="(item, index) in list[kind].slice(0, 4)" :key="item.id"> <span
+                            :class='"hot-" + (index + 1)'>{{
                 index + 1
             }}</span> {{ item.title }}</li>
                 </ul>
@@ -35,7 +36,8 @@
                     <ChatDotSquare />
                 </el-icon>求片</div>
             <div @click="goHome" class="television__user-avatar">
-
+                <img v-if="userInfoStore.user?.avatar" :src="userInfoStore.user?.avatar"
+                    :alt="userInfoStore.user?.nickname">
             </div>
         </div>
     </div>
@@ -309,6 +311,15 @@ watch([searchInputFlag, flurBoxFlag], ([n], [n2]) => {
                 width: 32px;
                 border-radius: 50%;
                 background-color: azure;
+                position: relative;
+
+                >img {
+                    @include position(absolute, 0, 0);
+                    height: 100%;
+                    width: 100%;
+                    border-radius: 50%;
+
+                }
             }
         }
 

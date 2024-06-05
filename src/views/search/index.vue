@@ -30,7 +30,7 @@ const msg = ref(route.query.key === "正在热播" ? "正在热播" : `与“${r
 watch(
     () => route.query.key,
     (newVal: unknown) => {
-        msg.value = `与“${newVal}”相关的影片 共22个`;
+        initData()
     })
 const televisions = ref<ItemType[]>([])
 function initData() {

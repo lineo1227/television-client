@@ -7,7 +7,7 @@
             <div class="details__container-digest">
                 <h4>电影简介</h4>
                 <p>{{ video?.videoWithRating[0]?.description }}</p>
-                <Upload :url="video?.videoWithRating[0]?.videoUrl" />
+                <Upload v-if="video?.videoWithRating[0]?.videoUrl" :url="video?.videoWithRating[0]?.videoUrl" />
 
             </div>
             <BingeWatch :itemList="ratingList" :img="img" title="同类影视推荐" desc="一次看个够!" />

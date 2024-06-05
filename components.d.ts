@@ -16,7 +16,6 @@ declare module 'vue' {
     ElInput: typeof import('element-plus/es')['ElInput']
     ElPagination: typeof import('element-plus/es')['ElPagination']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
-    ElTour: typeof import('element-plus/es')['ElTour']
     FlurBox: typeof import('./src/components/FlurBox.vue')['default']
     ItemCom: typeof import('./src/components/ItemCom.vue')['default']
     LoginCom: typeof import('./src/components/LoginCom.vue')['default']
